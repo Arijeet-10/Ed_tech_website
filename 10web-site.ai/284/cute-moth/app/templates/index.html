@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>SKILL UP</h1>
+    </header>
+    <div class="container">
+        <form id="resource-form" class="form">
+            <label for="role">Current Role:</label>
+            <input type="text" id="role" name="role" placeholder="e.g., Fresher" required>
+
+            <label for="skills">Skills (comma-separated):</label>
+            <input type="text" id="skills" name="skills" placeholder="e.g., Python, Machine Learning" required>
+
+            <label for="skill-gaps">Skill Gaps:</label>
+            <input type="text" id="skill-gaps" name="skill_gaps" placeholder="e.g., Cloud Computing, DevOps" required>
+
+            <label for="career-ambitions">Career Ambitions:</label>
+            <input type="text" id="career-ambitions" name="career_ambitions" placeholder="e.g., AIML Engineer" required>
+
+            <label for="language">Preferred Language:</label>
+            <input type="text" id="language" name="language" placeholder="e.g., English" required>
+
+            <button type="submit">Suggest Recommendations</button>
+        </form>
+
+        <div id="results">
+            <h2>Recommendations</h2>
+            <div id="courses" class="recommendation-section">
+                <h3>Courses:</h3>
+                <ul></ul>
+            </div>
+            <div id="videos" class="recommendation-section">
+                <h3>Videos:</h3>
+                <ul></ul>
+            </div>
+            <div id="jobs" class="recommendation-section">
+                <h3>Job Openings:</h3>
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+   <footer>
+       <p></p>
+    </footer>
+    <script>
+        document.getElementById('resource-form').onsubmit = async function (e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            const recommendations = await response.json();
+            const coursesList = document.querySelector('#courses ul');
+            const videosList = document.querySelector('#videos ul');
+            const jobsList = document.querySelector('#jobs ul');
+
+            coursesList.innerHTML = '';
+            videosList.innerHTML = '';
+            jobsList.innerHTML = '';
+
+            if (recommendations.message) {
+                alert(recommendations.message);
+            }
+
+            recommendations.courses.forEach(course => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="${course.link}" target="_blank">${course.name}</a> (${course.platform})`;
+                coursesList.appendChild(li);
+            });
+
+            recommendations.videos.forEach(video => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="${video.link}" target="_blank">${video.name}</a> (${video.platform})`;
+                videosList.appendChild(li);
+            });
+
+            recommendations.jobs.forEach(job => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="${job.link}" target="_blank">${job.title}</a> at ${job.company}`;
+                jobsList.appendChild(li);
+            });
+        };
+    </script>
+</body>
+</html>

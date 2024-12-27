@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Resource Predictor</h1>
+        <form id="resource-form">
+            <label for="role">Current Role:</label>
+            <input type="text" id="role" name="role" placeholder="e.g., Data Scientist" list="roles-list" required>
+             <datalist id="roles-list">
+               <option value="Data Scientist">
+                <option value="Software Engineer">
+               <option value="Product Manager">
+               <option value="UI/UX Designer">
+                <option value="Cloud Architect">
+                <option value="AIML Engineer">
+                <option value="Full-Stack Developer">
+                <option value="DevOps Engineer">
+                <option value="Cybersecurity Analyst">
+                <option value="Business Analyst">
+                <option value="Digital Marketing Specialist">
+                <option value="Sales Executive">
+                <option value="Human Resources Manager">
+                <option value="Mechanical Engineer">
+                <option value="Electrical Engineer">
+                <option value="Civil Engineer">
+                <option value="Content Writer">
+                <option value="Graphic Designer">
+                <option value="Project Manager">
+                 <option value="Data Analyst">
+               <option value="Customer Support Representative">
+               <option value="Network Administrator">
+               <option value="Quality Assurance Engineer">
+               <option value="Financial Analyst">
+               <option value="Research Scientist">
+               <option value="Operations Manager">
+               <option value="Game Developer">
+               <option value="Database Administrator">
+               <option value="SEO Specialist">
+                <option value="Marketing Manager">
+               <option value="Fresher">
+                <!-- Add more options as needed -->
+           </datalist>
+
+            <label for="skills">Skills:</label>
+            <input type="text" id="skills" name="skills" placeholder="e.g., Python, Machine Learning" list="skills-list" required>
+            <datalist id="skills-list">
+                <option value="Python">
+                <option value="Machine Learning">
+                <option value="Cloud Computing">
+                <option value="DevOps">
+                 <option value="TensorFlow">
+                <option value="React">
+                <option value="Flask">
+                 <option value="Docker">
+                <option value="JavaScript">
+                  <option value="SQL">
+                 <option value="Agile">
+                <option value="HTML">
+                <option value="CSS">
+                  <option value="Communication">
+                <!-- Add more options as needed -->
+            </datalist>
+
+             <label for="skill-gaps">Skill Gaps:</label>
+              <input type="text" id="skill-gaps" name="skill_gaps" placeholder="e.g., Cloud Computing, DevOps" list = "gaps-list" required>
+              <datalist id = "gaps-list">
+                 <option value="Cloud Computing">
+                <option value="DevOps">
+                 <option value="AI/ML">
+                <option value="Frontend Development">
+                <option value="Backend Development">
+                 <option value="Cybersecurity">
+                 <option value="Project Management">
+                <!-- Add more options as needed -->
+            </datalist>
+
+            <label for="career-ambitions">Career Ambitions:</label>
+            <input type="text" id="career-ambitions" name="career_ambitions" placeholder="e.g., AI Engineer, Team Lead" list = "ambitions-list" required>
+            <datalist id="ambitions-list">
+              <option value="AI Engineer">
+                <option value="Team Lead">
+                 <option value="Data Scientist">
+                <option value="Project Manager">
+                <option value="Software Architect">
+                 <option value="Cybersecurity Specialist">
+                 <option value="Full Stack Developer">
+                 <option value="Technical lead">
+                <!-- Add more options as needed -->
+              </datalist>
+
+
+            <label for="language">Preferred Language:</label>
+            <select id="language" name="language" required>
+                <option value="English">English</option>
+               <option value="Bengali">Bengali</option>
+               <option value="Hindi">Hindi</option>
+               <option value="Spanish">Spanish</option>
+               <option value="French">French</option>
+               <!-- Add more language options -->
+            </select>
+
+            <button type="submit">Predict Resources</button>
+        </form>
+       <div id="results" style="display: none;">
+            <h2>Recommendations</h2>
+            <div id="courses">
+                <h3>Courses:</h3>
+                <ul></ul>
+            </div>
+            <div id="videos">
+                <h3>Videos:</h3>
+                <ul></ul>
+            </div>
+            <div id="jobs">
+                <h3>Job Openings:</h3>
+                <ul></ul>
+            </div>
+        </div>
+       <div id="error-message" style="color: red; margin-top: 10px; display: none;"></div>
+     </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
